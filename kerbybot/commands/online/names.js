@@ -29,10 +29,14 @@ class NamesCommand extends commando.Command {
                             var ret = "";
 
                             obj.forEach(function(element) {
-                                ret += `${element.name}\n`
+                                ret += `${element.name.replace(/_/g,"\\_")}\n`
                             });
 
-                            message.reply(ret);
+                            message.reply(`Here are ${arg}'s previous Minecraft usernames\n`, {embed: {
+                                color: 3447003,
+                                description: ret,
+                                thumbnail: {url: `https://minotar.net/helm/${arg}/100`}
+                            }});
                         }
                     });
                 }

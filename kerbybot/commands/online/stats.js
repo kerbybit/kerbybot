@@ -25,7 +25,24 @@ class StatsCommand extends commando.Command {
                     if (body.startsWith("Error: ")) {
                         message.reply(body);
                     } else {
-                        message.reply( `Here are ${name}'s stats for ` + body.substring(1,body.length-1).replace(/,/g,"\n"));
+                        var stats = body.substring(1, body.length-1).split(",");
+                        var game = stats.shift();
+                        var ret = "";
+
+                        stats.forEach(function(stat) {
+                            if (stat.includes(":")) {
+                                stat = `**${stat.replace(":", ":**")}`;
+                            } else if (stat != "") {
+                                stat = `**${stat}**`;
+                            }
+                            ret += `${stat}\n`;
+                        });
+
+                        message.reply( `Here are ${name}'s Hypixel stats for ${game}`, {embed: {
+                            color: 8602356,
+                            description: ret,
+                            thumbnail: {url: `https://minotar.net/helm/${name}/100`}
+                        }});
                     }
                 }
             });
