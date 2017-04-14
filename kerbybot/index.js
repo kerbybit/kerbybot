@@ -3,7 +3,6 @@ const bot = new commando.Client();
 
 console.log("Bot started");
 
-bot.registry.registerGroup('random', 'Random');
 bot.registry.registerGroup('online', 'Online');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");

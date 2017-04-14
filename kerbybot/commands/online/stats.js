@@ -20,15 +20,19 @@ class StatsCommand extends commando.Command {
             message.reply("getting stats for " + name);
             message.channel.startTyping();
             
-            request.get("http://hypixel.kerbybit.com/stats/" + game + "/" + name + ".txt", function (error, response, body) {
+            request.get(`http://hypixel.kerbybit.com/stats/${game}/${name}.txt`, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
-                    message.reply( "here are " + name + "'s stats for " + body.substring(1,body.length-1).replace(/,/g,"\n"));
+                    if (body.startsWith("Error: ")) {
+                        message.reply(body);
+                    } else {
+                        message.reply( `Here are ${name}'s stats for ` + body.substring(1,body.length-1).replace(/,/g,"\n"));
+                    }
                 }
             });
 
             message.channel.stopTyping();
         } else {
-            message.reply("use !stats <username> <game>")
+            message.reply("Use !stats <username> <game>")
         }
     }
 }
