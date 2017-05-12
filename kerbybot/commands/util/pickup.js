@@ -30,7 +30,7 @@ class PickupCommand extends commando.Command {
                 if (!error && response.statusCode == 200) {
                     var reply = body.substring(body.indexOf(`<div id="content">`)+18).trim();
                     reply = reply.substring(0, reply.indexOf(`</div>`));
-                    message.reply(reply.trim().replace(/(\[&quote;|&quote\])/g, `"`));
+                    message.reply(reply.trim().replace(/(\[&quot;|&quot\])/g, `"`));
                 } else {
                     message.reply(`I'm gay`);
                 }
